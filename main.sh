@@ -1,5 +1,15 @@
 #!/usr/bin/env sh
 
+# Get the human genome, make a bed file out of it
+wget "hgdownload.soe.ucsc.edu/goldenPath/hg19/bigZips/hg19.2bit"
+twoBitToFa hg19.2bit human_hg19.fa
+samtools faidx human_hg19.fa
+awk '{print $1 "\t0\t" $2}' human_hg19.fa.fai > human_hg19.bed
+bedtools merge -i human_hg19.bed -d 10000 > human_hg19.bed
+
+# Get the gnomAD data
+wget "gnomad.com/wholegenome"
+
 # Filter on AF and remove all INFO except AF from gnomad whole genome dowload
 bcftools filter -i "INFO/AF>0.45 && INFO/AF<0.7" wholegenome.vcf.bgz | bcftools annotate -x ^INFO/AF | bgzip > wholegenome_AF_filter.vcf.bgz
 
