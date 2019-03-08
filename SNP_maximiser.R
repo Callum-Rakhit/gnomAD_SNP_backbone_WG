@@ -22,10 +22,10 @@ SNP_maximiser <- function(example_vcf, output_name){
     tmp_value <- tmp_value + 100
     names(output_name) <- c("Chr", "Start", "End")
     output_name[nrow(output_name) + 1,] <- list(
-      as.character(chr[1,]), tmp_value_old+1, tmp_value)
+      as.character(chr[1,]), tmp_value_old + 1, tmp_value)
   }
   output_name[nrow(output_name) + 1,] <- list(
-    as.character(chr[1,]), tmp_value_old+101, end)
+    as.character(chr[1,]), tmp_value_old + 101, end)
   return(output_name)
 }
 
