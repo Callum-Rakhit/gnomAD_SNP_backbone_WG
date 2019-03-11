@@ -46,14 +46,12 @@ chr_11q
 chr_17q
 chr_19q
 chr_1p
-Chr_3
+chr_3
 chr_6
-Chr_8
+chr_8
 
 # Intersect with ROI
 # bedtools intersect -wa -wb -a 0.5Mb_filter.bed -b regions_0.5Mb.bed > regions_0.5Mb_filtered.bed
 
 # Remove extra columns
 # awk -v OFS='\t' {'print $1, $2, $3, $7'} regions_0.5Mb_filtered.bed > regions_0.5Mb_filtered1.bed
-
-

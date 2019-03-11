@@ -86,8 +86,12 @@ biggest_vcf () {
   done
 }
 
+biggest_vcf # Run the function
+
 # Paste all the vcfs into one file
 for i in *.vcf; do cat ${i} >> collated_vcf.vcf; done
+
+#  1Mbformost_0.5forsome_plusC19M_1.bed
 
 # convert vcf into a bed
 awk '{print $1, $2, $2+1, $3"_"$8}' collated_vcf.vcf >> collated_bed.bed
@@ -99,4 +103,4 @@ sed -i.bak 's/ /\t/g' collated_bed.bed
 sortBed -i collated_bed.bed > collated_sorted_bed.bed
 
 # Merge the bedtools regions based on overlap, save the features in the fourth column
-bedtools merge -i collated_sorted_bed.bed -d 10 -c 4 -o collapse -delim "|" > collated_sorted_merged_bed.bed
+bedtools merge -i collated_sorted_bed.bed -d 100 -c 4 -o collapse -delim "|" > collated_sorted_merged_bed.bed
